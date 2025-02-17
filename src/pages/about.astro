@@ -1,5 +1,31 @@
 ---
+import "../styles/global.css";
+const pageTitle = "About Me";
+const identity = {
+    firstName: "Chris",
+    country: "Ghana",
+    occupation: "Software Developer",
+    hobbies: ["Football", "Reading", "Coding"],
+};
+const skills = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React",
+    "Python",
+    "Node.js",
+    "MongoDB",
+    "AWS",
+    "Terraform",
+    "Docker",
+];
 
+const happy = true;
+const finished = false;
+const goal = 3;
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -8,19 +34,43 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>About</title>
+        <title>{pageTitle}</title>
+        <style define:vars={{ skillColor, fontWeight, textCase }}>
+            h1 {
+                color: purple;
+                font-size: 4rem;
+            }
+            .skill {
+                color: var(--skillColor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+        </style>
     </head>
     <body>
         <a href="/">Home</a>
         <a href="/about">About</a>
         <a href="/blog">Blog</a>
-        <h1>About Me</h1>
-        <h2>Me and my new Astro site!</h2>
-        <p>This is the about page.</p>
+        <h1>{pageTitle}</h1>
         <p>
-            It's a great place to tell your visitors a little bit about yourself
-            and your site. It will update as I complete more of the tutorial so
-            we will keep checking to see how my journey is going.
+            My name is {identity.firstName} and I am from {identity.country}. I
+            am a {identity.occupation} and I enjoy {
+                identity.hobbies.join(", ")
+            }. I have experience with the following technologies:
         </p>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
+        </ul>
+        {happy && <p>I am happy to be learning Astro!</p>}
+
+        {finished && <p>I finished this tutorial!</p>}
+
+        {
+            goal === 3 ? (
+                <p>My goal is to finish in 3 days.</p>
+            ) : (
+                <p>My goal is not 3 days.</p>
+            )
+        }
     </body>
 </html>
